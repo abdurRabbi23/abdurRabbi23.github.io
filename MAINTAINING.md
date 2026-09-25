@@ -33,6 +33,7 @@ and phone menu). There's no build step. What's in the folder is exactly what goe
 | `js/main.js` | Theme toggle + phone menu | Almost never |
 | `assets/img/` | Photos (all JPG, under 300 KB each) | When adding images |
 | `assets/cv/Md_Abdur_Rabbi_CV.pdf` | The CV behind the "Download CV" button | When your CV changes |
+| `assets/fonts/` | The IBM Plex font files (+ their free license) | No |
 | `404.html` | "Page not found" page | No |
 | `sitemap.xml` | Tells Google about the site. Update the date after big changes | Sometimes |
 | `favicon.svg`, `favicon.ico`, `robots.txt`, `.nojekyll` | Tab icons, search-engine rules, GitHub setting | No |

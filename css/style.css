@@ -5,9 +5,19 @@
    - The first block is LIGHT mode, the next two blocks are DARK mode
      (one for "follow the device setting", one for "user pressed the
      toggle"). Keep the two dark blocks identical.
-   HOW TO CHANGE FONTS: edit --font-sans / --font-mono, and the Google
-   Fonts <link> in the <head> of index.html and 404.html.
+   FONTS: IBM Plex files live in assets/fonts/ (loaded by section 0 below).
+   To change fonts, replace those @font-face blocks and --font-sans / --font-mono.
    ===================================================================== */
+
+
+/* ---------- 0. Fonts (self-hosted, so the site never waits for another server) ---------- */
+/* IBM Plex, SIL Open Font License (assets/fonts/OFL-LICENSE.txt). "swap" = show text
+   immediately in a system font, then switch to IBM Plex as soon as it has loaded. */
+@font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 400; font-display: swap; src: url("../assets/fonts/ibm-plex-sans-400.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 500; font-display: swap; src: url("../assets/fonts/ibm-plex-sans-500.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 600; font-display: swap; src: url("../assets/fonts/ibm-plex-sans-600.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url("../assets/fonts/ibm-plex-mono-400.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 500; font-display: swap; src: url("../assets/fonts/ibm-plex-mono-500.woff2") format("woff2"); }
 
 
 /* ---------- 1. Colors & fonts (design tokens) ---------- */
