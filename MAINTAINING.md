@@ -35,7 +35,8 @@ and phone menu). There's no build step. What's in the folder is exactly what goe
 | `assets/cv/Md_Abdur_Rabbi_CV.pdf` | The CV behind the "Download CV" button | When your CV changes |
 | `404.html` | "Page not found" page | No |
 | `sitemap.xml` | Tells Google about the site. Update the date after big changes | Sometimes |
-| `favicon.svg`, `robots.txt`, `.nojekyll` | Tab icon, search-engine rules, GitHub setting | No |
+| `favicon.svg`, `favicon.ico`, `robots.txt`, `.nojekyll` | Tab icons, search-engine rules, GitHub setting | No |
+| `README.md` | Short description shown on your GitHub repo page | Rarely |
 | `tools/shrink_image.py` | Makes photos small enough for the web | You run it |
 | `PROGRESS.md`, `_notes/`, `_originals/` | Private notes and full-size originals. **Never uploaded** (listed in `.gitignore`) | Optional |
 

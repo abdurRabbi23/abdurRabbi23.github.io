@@ -9,17 +9,30 @@
 // ---------- 1. Theme toggle ----------
 // (The starting theme is already set by the tiny script in <head>, so the
 //  page never "flashes" the wrong colors while loading.)
+const root = document.documentElement;
 const themeButton = document.getElementById('theme-toggle');
 
+function setTheme(theme) {
+  root.dataset.theme = theme;
+  themeButton.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+}
+
 themeButton.addEventListener('click', function () {
-  const root = document.documentElement;
   const newTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
-  root.dataset.theme = newTheme;
-  themeButton.setAttribute('aria-label', newTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+  setTheme(newTheme);
   try { localStorage.setItem('theme', newTheme); } catch (e) { /* private mode: ignore */ }
 });
-themeButton.setAttribute('aria-label',
-  document.documentElement.dataset.theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+setTheme(root.dataset.theme);
+
+// If the visitor never pressed the toggle, follow their device when it
+// switches between light and dark (e.g. automatic dark mode at night).
+if (window.matchMedia) {
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (event) {
+    let saved = null;
+    try { saved = localStorage.getItem('theme'); } catch (e) {}
+    if (!saved) setTheme(event.matches ? 'dark' : 'light');
+  });
+}
 
 
 // ---------- 2. Mobile menu ----------
@@ -27,15 +40,30 @@ const menuButton = document.getElementById('menu-toggle');
 const navLinks = document.getElementById('nav-links');
 
 if (menuButton && navLinks) {
+  const setMenu = function (open) {
+    navLinks.classList.toggle('open', open);
+    menuButton.setAttribute('aria-expanded', String(open));
+    menuButton.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
+
   menuButton.addEventListener('click', function () {
-    const isOpen = navLinks.classList.toggle('open');
-    menuButton.setAttribute('aria-expanded', String(isOpen));
+    setMenu(!navLinks.classList.contains('open'));
   });
   // Close the menu after tapping a link
   navLinks.addEventListener('click', function (event) {
-    if (event.target.tagName === 'A') {
-      navLinks.classList.remove('open');
-      menuButton.setAttribute('aria-expanded', 'false');
+    if (event.target.tagName === 'A') setMenu(false);
+  });
+  // Close the menu when tapping anywhere outside it
+  document.addEventListener('click', function (event) {
+    if (navLinks.classList.contains('open') && !navLinks.contains(event.target) && !menuButton.contains(event.target)) {
+      setMenu(false);
+    }
+  });
+  // Close the menu with the Esc key, and put keyboard focus back on the button
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && navLinks.classList.contains('open')) {
+      setMenu(false);
+      menuButton.focus();
     }
   });
 }
