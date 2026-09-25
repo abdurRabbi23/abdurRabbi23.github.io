@@ -204,3 +204,20 @@ The site is never really "broken" forever. Every pushed version is saved on GitH
 - Once a year: update the CV PDF, and re-check that links (GitHub repos, LinkedIn) still work.
 - LinkedIn preview looks outdated after changes? Paste your URL into
   https://www.linkedin.com/post-inspector/ to refresh it.
+
+---
+
+## 9. Later: get listed on Google (Google Search Console, one-time, ~10 min)
+1. Go to https://search.google.com/search-console and sign in with your Google account.
+2. **Add property** → choose **URL prefix** → type `https://abdurrabbi23.github.io/` → **Continue**.
+3. Open **Other verification methods → HTML tag** and click **Copy**. You get a line like
+   `<meta name="google-site-verification" content="AbC123...xyz" />`
+4. In `index.html`, paste that line in the `<head>`, right below the line
+   `<meta name="author" content="Md Abdur Rabbi">`. Save.
+5. Publish (section 0), wait 2 minutes, then click **Verify** in Search Console.
+   (Keep the tag in the file forever. Removing it un-verifies the site.)
+6. In Search Console's left menu: **Sitemaps** → enter `sitemap.xml` → **Submit**.
+7. Optional: **URL Inspection** → paste `https://abdurrabbi23.github.io/` → **Request indexing**.
+
+Google usually lists a new site within a few days to two weeks. Linking the site from LinkedIn and
+GitHub helps it get found faster.
