@@ -54,6 +54,7 @@
       try { saved = localStorage.getItem('theme'); } catch (e) {}
       var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
       document.documentElement.dataset.theme = saved || (prefersDark ? 'dark' : 'light');
+      document.documentElement.classList.add('js');  // lets the CSS know animations can run
     })();
   </script>
 
@@ -102,6 +103,8 @@
         </button>
       </div>
     </nav>
+    <!-- Thin bar that fills up as you scroll down the page (driven by js/main.js) -->
+    <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
   </header>
 
   <main id="main">
@@ -111,7 +114,9 @@
       <div class="container hero-inner">
         <div>
           <h1>Md Abdur Rabbi</h1>
-          <p class="headline">Mechatronics Engineer | Robotics &amp; Automation</p>
+          <!-- ROTATING KEYWORDS: edit the words in data-words, separated by | (keep the first one
+               the same as the text inside the span; that's what shows if animations are off). -->
+          <p class="headline">Mechatronics Engineer <span class="sep">|</span> <span class="rotator" data-words="Robotics &amp; Automation|Embedded Systems|Computer Vision|Reinforcement Learning">Robotics &amp; Automation</span></p>
           <p class="intro">I build machines that sense, decide and move, from STM32 and ESP32 firmware to reinforcement-learning policies for a UR5e robot arm. KUET Mechatronics graduate, based in Khulna, Bangladesh.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="assets/cv/Md_Abdur_Rabbi_CV.pdf" download>
@@ -171,8 +176,8 @@
               <li>Reinforcement learning</li><li>PPO / PPO-Lagrangian</li><li>NVIDIA Isaac Sim</li><li>Isaac Lab</li><li>Python</li><li>Linux</li>
             </ul>
             <div class="stats">
-              <div class="stat"><b>&gt;80%</b><span>lower average safety cost</span></div>
-              <div class="stat"><b>~99.9%</b><span>lift success, same as the baseline</span></div>
+              <div class="stat"><b data-count="80" data-prefix="&gt;" data-suffix="%">&gt;80%</b><span>lower average safety cost</span></div>
+              <div class="stat"><b data-count="99.9" data-decimals="1" data-prefix="~" data-suffix="%">~99.9%</b><span>lift success, same as the baseline</span></div>
             </div>
           </div>
         </div>
@@ -214,6 +219,8 @@
     <!-- ===== PROJECTS =====
          Each project is one <article class="card"> ... </article> block.
          To add a project: copy a whole block, paste it, and change the text.
+         data-category="..." decides which filter button shows the card. Use one or more of:
+         embedded  vision  mechanical   (separated by spaces)
          (See MAINTAINING.md for a ready-to-paste template.) -->
     <section class="section" id="projects">
       <div class="container">
@@ -221,10 +228,18 @@
         <h2>Projects</h2>
         <p class="section-intro">Hardware and software I've designed and built, from mechanisms and firmware to computer vision.</p>
 
+        <!-- Filter buttons: data-filter must match a word used in the cards' data-category -->
+        <div class="filters" id="project-filters" role="group" aria-label="Filter projects" hidden>
+          <button type="button" class="filter-btn" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" class="filter-btn" data-filter="embedded" aria-pressed="false">Embedded &amp; IoT</button>
+          <button type="button" class="filter-btn" data-filter="vision" aria-pressed="false">Robotics &amp; Vision</button>
+          <button type="button" class="filter-btn" data-filter="mechanical" aria-pressed="false">Mechanical &amp; Automation</button>
+        </div>
+
         <div class="projects-grid">
 
           <!-- ----- Project: Automated Paper Grading and Dispensing System ----- -->
-          <article class="card">
+          <article class="card" data-category="mechanical vision">
             <img class="card-img" src="assets/img/paper-grader-prototype.jpg" width="506" height="537" loading="lazy"
                  alt="Prototype of the automated paper grading and dispensing machine with rollers, lead screws and control boards">
             <div class="card-body">
@@ -252,7 +267,7 @@
           </article>
 
           <!-- ----- Project: Gesture-Controlled Car ----- -->
-          <article class="card">
+          <article class="card" data-category="vision embedded">
             <img class="card-img" src="assets/img/gesture-car.jpg" width="800" height="1067" loading="lazy"
                  alt="Four-wheel robot car with an ESP32 board, motor driver and three 18650 batteries on an acrylic chassis">
             <div class="card-body">
@@ -278,7 +293,7 @@
           </article>
 
           <!-- ----- Project: STM32 Environmental Monitoring Station ----- -->
-          <article class="card">
+          <article class="card" data-category="embedded">
             <img class="card-img" src="assets/img/stm32-station.jpg" width="800" height="1067" loading="lazy"
                  alt="STM32 Nucleo board wired to a BMP280 sensor and a 20x4 LCD showing temperature and pressure readings">
             <div class="card-body">
@@ -304,7 +319,7 @@
           </article>
 
           <!-- ----- Project: IoT Real-Time Weather Station (no photo yet) ----- -->
-          <article class="card">
+          <article class="card" data-category="embedded">
             <div class="card-body">
               <h3>IoT Real-Time Weather Station (3 platforms)</h3>
               <p class="card-meta">2024 · Solo project</p>
@@ -324,7 +339,7 @@
           </article>
 
           <!-- ----- Project: Automated Washing Plant ----- -->
-          <article class="card">
+          <article class="card" data-category="mechanical embedded">
             <img class="card-img" src="assets/img/washing-plant.jpg" width="1400" height="788" loading="lazy"
                  alt="Conveyor-belt washing plant prototype with water flowing onto the belt">
             <div class="card-body">
@@ -477,7 +492,7 @@
             <a class="btn btn-primary" href="mailto:abrabbi9999@gmail.com">Email me</a>
           </div>
           <ul class="contact-list">
-            <li><span>Email</span><a href="mailto:abrabbi9999@gmail.com">abrabbi9999@gmail.com</a></li>
+            <li><span>Email</span><a href="mailto:abrabbi9999@gmail.com">abrabbi9999@gmail.com</a><button type="button" class="copy-btn" data-copy="abrabbi9999@gmail.com" hidden>Copy</button></li>
             <li><span>Phone</span><a href="tel:+8801772847930">+880 1772-847930</a></li>
             <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/abdurrabbi" target="_blank" rel="noopener">linkedin.com/in/abdurrabbi</a></li>
             <li><span>GitHub</span><a href="https://github.com/abdurRabbi23" target="_blank" rel="noopener">github.com/abdurRabbi23</a></li>
@@ -487,6 +502,8 @@
       </div>
     </section>
 
+    <!-- Invisible: reads short updates aloud to screen-reader users ("Showing 2 projects", "Email copied") -->
+    <p class="sr-only" id="sr-status" aria-live="polite"></p>
   </main>
 
   <!-- ===== FOOTER ===== -->
@@ -496,6 +513,11 @@
       <p>Built with plain HTML &amp; CSS · Hosted on GitHub Pages</p>
     </div>
   </footer>
+
+  <!-- Back-to-top button (appears after scrolling down) -->
+  <a class="to-top" href="#top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </a>
 
   <script src="js/main.js"></script>
 </body>

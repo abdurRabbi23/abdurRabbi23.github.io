@@ -95,7 +95,7 @@ Once you have a real job, also update the "What I'm looking for" line (ABOUT sec
 
 ```html
           <!-- ----- Project: YOUR PROJECT NAME ----- -->
-          <article class="card">
+          <article class="card" data-category="embedded">
             <img class="card-img" src="assets/img/YOUR-IMAGE.jpg" width="1400" height="1050" loading="lazy"
                  alt="Describe what the photo shows, for blind visitors and Google">
             <div class="card-body">
@@ -120,6 +120,9 @@ Once you have a real job, also update the "What I'm looking for" line (ABOUT sec
             </div>
           </article>
 ```
+- **`data-category`** decides which filter button shows the card. Use one or more of `embedded`,
+  `vision`, `mechanical`, separated by spaces (e.g. `data-category="vision embedded"`). The counts
+  on the filter buttons update by themselves.
 - **No photo?** Delete the whole `<img ... >` line (both lines of it). The card still looks fine.
 - **No GitHub repo?** Delete the whole `<div class="card-links"> ... </div>` part.
 - `width`/`height` should match your image. `tools/shrink_image.py` prints the size.
@@ -141,7 +144,23 @@ If it isn't square, crop it square first (Windows Photos → Edit → Crop → S
 ### 3f. Add a skill
 Search `===== SKILLS`, find the right group, and add `<li>New skill</li>` inside its `<ul class="tags">`.
 
-### 3g. Change colors
+### 3g. The interactive features (what they are and how to change them)
+Everything below lives in `js/main.js` (numbered sections) and at the end of `css/style.css`
+(section 16). **New projects, jobs and skills get the animations automatically**. You don't
+need to do anything.
+
+| Feature | How to change it |
+|---|---|
+| **Rotating keywords** in the headline | In `index.html`, search `ROTATING KEYWORDS`. Edit `data-words="A\|B\|C"`. Keep the first phrase identical to the text inside the `<span>` |
+| **Project filter buttons** | In `index.html`, search `Filter buttons`. To add a category: copy a `<button ... data-filter="xyz">`, change the label, and use `xyz` in some cards' `data-category` |
+| **Thesis numbers count up** | The `<b data-count="80" data-prefix="&gt;" data-suffix="%">&gt;80%</b>` tags. Change `data-count` **and** the visible text together |
+| **Scroll fade-in, card hover, progress bar, back-to-top, active menu link, photo pop-up, copy-email** | Automatic, nothing to edit |
+
+Visitors whose phone/computer is set to "reduce motion" get no animations, and if JavaScript
+fails, all content still shows. **To switch one feature off**, open `js/main.js`, find its
+numbered section, and put `//` at the start of each of its lines (or ask a developer friend).
+
+### 3h. Change colors
 Open `css/style.css`. Section 1 at the top has the light-mode colors, then two identical dark-mode
 blocks (change both). Colors are hex codes like `#0e7c86`. Pick new ones at https://htmlcolorcodes.com.
 

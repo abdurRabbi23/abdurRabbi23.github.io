@@ -22,6 +22,7 @@
   --on-accent:   #ffffff;   /* text on top of the teal button */
   --tag-bg:      #e3f1f2;   /* skill/tech tag background */
   --tag-text:    #0a5a61;   /* skill/tech tag text */
+  --shadow:      rgba(15, 27, 45, .28); /* card hover shadow */
 
   --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
@@ -35,7 +36,7 @@
   :root:not([data-theme="light"]) {
     --bg: #0d1520; --surface: #131e2c; --text: #e6edf5; --muted: #9fb0c3;
     --line: #223044; --line-strong: #34465e; --accent: #3cc4cf; --on-accent: #062a2e;
-    --tag-bg: #12323a; --tag-text: #8fe3ea;
+    --tag-bg: #12323a; --tag-text: #8fe3ea; --shadow: rgba(0, 0, 0, .6);
     color-scheme: dark;
   }
 }
@@ -43,7 +44,7 @@
 :root[data-theme="dark"] {
   --bg: #0d1520; --surface: #131e2c; --text: #e6edf5; --muted: #9fb0c3;
   --line: #223044; --line-strong: #34465e; --accent: #3cc4cf; --on-accent: #062a2e;
-  --tag-bg: #12323a; --tag-text: #8fe3ea;
+  --tag-bg: #12323a; --tag-text: #8fe3ea; --shadow: rgba(0, 0, 0, .6);
   color-scheme: dark;
 }
 
@@ -63,6 +64,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 img { max-width: 100%; height: auto; display: block; }
+[hidden] { display: none !important; }
 a { color: var(--accent); text-underline-offset: 3px; }
 a:hover { text-decoration-thickness: 2px; }
 h1, h2, h3 { line-height: 1.2; margin: 0 0 .5em; }
@@ -232,8 +234,9 @@ li { margin-bottom: .35em; }
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
   overflow: hidden;
 }
-.card-img { aspect-ratio: 4 / 3; width: 100%; object-fit: cover; border-bottom: 1px solid var(--line); background: var(--tag-bg); }
-.card-body { padding: 18px 20px 20px; display: flex; flex-direction: column; flex: 1; }
+.card-img { aspect-ratio: 4 / 3; width: 100%; object-fit: cover; background: var(--tag-bg); }
+.card-body { padding: 18px 20px 20px; display: flex; flex-direction: column; flex: 1; position: relative; background: var(--surface); }
+.card-img + .card-body { border-top: 1px solid var(--line); }
 .card-body h3 { margin-bottom: 6px; }
 .card-meta { font-family: var(--font-mono); font-size: .8rem; color: var(--muted); margin-bottom: 10px; }
 .card-summary { color: var(--muted); font-size: 1rem; }
@@ -299,3 +302,115 @@ details img { border: 1px solid var(--line); border-radius: var(--radius); }
 /* ---------- 15. 404 page ---------- */
 .not-found { min-height: 70vh; display: flex; align-items: center; }
 .not-found .code { font-family: var(--font-mono); font-size: 4rem; color: var(--accent); margin: 0; line-height: 1; }
+
+
+/* =====================================================================
+   16. Interactive extras (all driven by js/main.js)
+   ---------------------------------------------------------------------
+   Everything below is decoration. If JavaScript is off, the page still
+   shows all content; if the visitor's device asks for reduced motion,
+   the animations are switched off (see the end of this section).
+   ===================================================================== */
+
+/* Screen-reader-only text (invisible on screen, still read aloud) */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+/* --- Scroll reveal: items fade and slide up as they scroll into view --- */
+.js .reveal { opacity: 0; }
+.js .reveal.is-visible { opacity: 1; animation: reveal-up .6s cubic-bezier(.2, .7, .2, 1) backwards; animation-delay: var(--reveal-delay, 0ms); }
+@keyframes reveal-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+/* --- Project cards: lift, highlight and zoom the photo on hover (mouse only) --- */
+.card { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+.card-img { transition: transform .5s ease; }
+@media (hover: hover) {
+  .card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 14px 28px -16px var(--shadow); }
+  .card:hover .card-img { transform: scale(1.04); }
+}
+
+/* --- Photos you can click to enlarge --- */
+.zoomable { cursor: zoom-in; }
+
+/* --- Menu: highlight the section currently on screen --- */
+.nav-links a.active { color: var(--accent); }
+@media (min-width: 860px) { .nav-links a.active { box-shadow: inset 0 -2px 0 var(--accent); border-radius: var(--radius) var(--radius) 0 0; } }
+
+/* --- Reading progress bar under the header --- */
+.scroll-progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; pointer-events: none; }
+.scroll-progress span { display: block; height: 100%; background: var(--accent); transform: scaleX(0); transform-origin: left center; }
+
+/* --- Back-to-top button --- */
+.to-top {
+  position: fixed; right: 16px; bottom: 16px; z-index: 40;
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--accent); color: var(--on-accent);
+  box-shadow: 0 6px 18px -6px var(--shadow);
+  transition: opacity .25s ease, transform .25s ease, visibility .25s;
+}
+.to-top svg { width: 20px; height: 20px; }
+.js .to-top:not(.show) { opacity: 0; visibility: hidden; transform: translateY(10px); }
+
+/* --- Rotating keywords in the headline --- */
+.rotator { color: var(--accent); font-weight: 500; }
+.rotator.typing::after {
+  content: ""; display: inline-block; width: 2px; height: 1.05em; margin-left: 3px;
+  background: currentColor; vertical-align: -0.12em; animation: caret-blink 1s steps(1) infinite;
+}
+@keyframes caret-blink { 50% { opacity: 0; } }
+@media (max-width: 859px) {
+  .headline .sep { display: none; }
+  .headline .rotator { display: block; min-height: 1.65em; } /* own line on phones, so nothing jumps */
+}
+
+/* --- Thesis numbers keep the same width while counting up --- */
+.stat b { font-variant-numeric: tabular-nums; }
+
+/* --- Project filter buttons --- */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: -12px 0 24px; }
+.filter-btn {
+  font: inherit; font-size: .9rem; padding: 7px 14px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--line-strong); background: var(--surface); color: var(--text);
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+.filter-btn:hover { border-color: var(--accent); }
+.filter-btn[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.filter-btn .count { font-family: var(--font-mono); font-size: .8em; margin-left: 6px; }
+@media (max-width: 600px) {
+  /* Phones: one row of buttons you can swipe sideways, instead of three rows */
+  .filters { flex-wrap: nowrap; overflow-x: auto; margin-left: -16px; margin-right: -16px; padding: 2px 16px 6px; scrollbar-width: none; }
+  .filters::-webkit-scrollbar { display: none; }
+  .filter-btn { flex: 0 0 auto; }
+}
+
+/* --- Copy-email button --- */
+.copy-btn {
+  margin-left: auto; font-family: var(--font-mono); font-size: .8rem; padding: 4px 10px; cursor: pointer;
+  border: 1px solid var(--line-strong); border-radius: var(--radius); background: transparent; color: var(--text);
+}
+.copy-btn:hover { border-color: var(--accent); }
+.copy-btn.copied { color: var(--accent); border-color: var(--accent); }
+
+/* --- Photo lightbox (the pop-up that shows a photo full size) --- */
+.lightbox { padding: 0; border: 0; background: transparent; max-width: 94vw; max-height: 94vh; overflow: visible; }
+.lightbox::backdrop { background: rgba(5, 10, 18, .88); }
+.lightbox figure { margin: 0; display: table; }                       /* shrink-wraps to the photo's width... */
+.lightbox figcaption { display: table-caption; caption-side: bottom; } /* ...so the caption wraps under it */
+.lightbox img { width: auto; height: auto; max-width: min(94vw, 1100px); max-height: 82vh; border-radius: var(--radius); }
+.lightbox figcaption { color: #e6edf5; text-align: center; font-size: .95rem; padding-top: 10px; }
+.lightbox-close {
+  position: absolute; top: -14px; right: -14px; width: 40px; height: 40px; border-radius: 50%;
+  border: 0; background: #ffffff; color: #0f1b2d; font-size: 1.5rem; line-height: 1; cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .4);
+}
+@media (max-width: 600px) { .lightbox-close { top: -48px; right: 0; } }
+html:has(dialog[open]) { overflow: hidden; } /* stop the page scrolling behind the photo */
+
+/* --- Respect "reduce motion": show everything instantly, no movement --- */
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal { opacity: 1; }
+  .js .reveal.is-visible { animation: none; }
+  .card, .card-img, .to-top { transition: none; }
+  .card:hover, .card:hover .card-img { transform: none; }
+  .rotator.typing::after { animation: none; }
+}

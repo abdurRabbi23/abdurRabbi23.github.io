@@ -11,13 +11,15 @@ experience, skills and contact details.
 - Plain **HTML + CSS + a little vanilla JavaScript**. No framework, no build step.
 - Hosted free on **GitHub Pages** straight from the `main` branch.
 - Mobile-first layout, light/dark mode, accessible (WCAG AA contrast, keyboard navigation).
+- Interactive touches without libraries: scroll animations, project filters, photo lightbox,
+  section-aware navigation. All respect the visitor's reduced-motion setting.
 
 ## Structure
 | Path | Contents |
 |---|---|
 | `index.html` | The whole site (one page, sections marked with `===== NAME =====` comments) |
 | `css/style.css` | Styles (colors defined at the top) |
-| `js/main.js` | Theme toggle and mobile menu |
+| `js/main.js` | All interactive features (theme, menu, animations, filters, photo pop-up), in numbered sections |
 | `assets/` | Images and the CV (PDF) |
 | `MAINTAINING.md` | Step-by-step guide to updating the site |
 
