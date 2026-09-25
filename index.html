@@ -174,11 +174,11 @@
 
         <div class="case-study">
           <div class="case-block">
-            <h3>// Problem</h3>
+            <h3><span aria-hidden="true">// </span>Problem</h3>
             <p>A robot arm trained with reinforcement learning can learn to grasp well and still behave unsafely along the way, for example by moving through near-singular poses where it loses dexterity. Adding a penalty to the reward is the usual fix, but it gives no guarantee. Can stating safety as an explicit <em>constraint</em> make a learned grasping policy safer without making it worse at the task?</p>
           </div>
           <div class="case-block">
-            <h3>// Approach</h3>
+            <h3><span aria-hidden="true">// </span>Approach</h3>
             <ul>
               <li>Built a UR5e pick-and-lift task with a ROBOTIS RH-P12-RN gripper in NVIDIA Isaac Lab.</li>
               <li>Defined a safety cost that penalizes approaching kinematic singularities (the main constraint), joint limits, and the table.</li>
@@ -187,14 +187,14 @@
             </ul>
           </div>
           <div class="case-block">
-            <h3>// Results</h3>
+            <h3><span aria-hidden="true">// </span>Results</h3>
             <ul>
               <li>The constrained agent <strong>cut the average safety cost by more than 80%</strong> while keeping the <strong>same ~99.9% lift success</strong> as the unconstrained baseline.</li>
               <li>Its biggest effect was on <em>consistency</em>: the unconstrained agent's safety varied wildly from one training run to the next, while the constrained agent's stayed in a tight, predictable band.</li>
             </ul>
           </div>
           <div class="case-block">
-            <h3>// What I learned</h3>
+            <h3><span aria-hidden="true">// </span>What I learned</h3>
             <ul>
               <li>Unconstrained RL doesn't have one safety level. It has a spread, and which one a training run lands on is close to luck, so multi-seed evaluation is essential.</li>
               <li>Isolating one variable with a control arm is what makes a comparison trustworthy.</li>
@@ -248,7 +248,7 @@
 
           <!-- ----- Project: Gesture-Controlled Car ----- -->
           <article class="card">
-            <img class="card-img" src="assets/img/gesture-car.jpg" width="1000" height="1333" loading="lazy"
+            <img class="card-img" src="assets/img/gesture-car.jpg" width="800" height="1067" loading="lazy"
                  alt="Four-wheel robot car with an ESP32 board, motor driver and three 18650 batteries on an acrylic chassis">
             <div class="card-body">
               <h3>Gesture-Controlled Car</h3>
@@ -274,7 +274,7 @@
 
           <!-- ----- Project: STM32 Environmental Monitoring Station ----- -->
           <article class="card">
-            <img class="card-img" src="assets/img/stm32-station.jpg" width="1000" height="1333" loading="lazy"
+            <img class="card-img" src="assets/img/stm32-station.jpg" width="800" height="1067" loading="lazy"
                  alt="STM32 Nucleo board wired to a BMP280 sensor and a 20x4 LCD showing temperature and pressure readings">
             <div class="card-body">
               <h3>STM32 Environmental Monitoring Station</h3>
@@ -324,7 +324,7 @@
                  alt="Conveyor-belt washing plant prototype with water flowing onto the belt">
             <div class="card-body">
               <h3>Automated Washing Plant</h3>
-              <p class="card-meta">2023 · Team project · course project</p>
+              <p class="card-meta">2023 · Team course project</p>
               <p class="card-summary">A conveyor-belt system that automatically washes and dries parts, triggered by IR sensors.</p>
               <ul class="tags" aria-label="Technologies">
                 <li>Arduino Uno</li><li>Embedded C</li><li>IR sensors</li><li>Conveyor mechanism</li>
