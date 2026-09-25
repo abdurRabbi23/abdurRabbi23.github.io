@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<!--
+  =====================================================================
+  index.html — Md Abdur Rabbi's portfolio (the whole site is this page)
+  ---------------------------------------------------------------------
+  HOW TO EDIT: every section starts with a big comment banner like
+      ===== PROJECTS =====
+  Use Ctrl+F in your editor to jump to it. Change only the text between
+  the tags. See MAINTAINING.md for step-by-step instructions
+  (adding a project, replacing the CV, adding photos, publishing).
+  =====================================================================
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ===== PAGE TITLE & SEARCH/LINK-PREVIEW INFO (what Google and LinkedIn show) ===== -->
+  <title>Md Abdur Rabbi | Mechatronics Engineer, Robotics &amp; Automation</title>
+  <meta name="description" content="Mechatronics Engineering graduate (KUET) building robotic, embedded and automation systems: safe reinforcement learning on a UR5e arm, STM32/ESP32 firmware, and hands-on prototypes.">
+  <meta name="author" content="Md Abdur Rabbi">
+  <link rel="canonical" href="https://abdurrabbi23.github.io/">
+
+  <!-- Open Graph: the preview card on LinkedIn, Facebook, WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://abdurrabbi23.github.io/">
+  <meta property="og:title" content="Md Abdur Rabbi | Mechatronics Engineer, Robotics &amp; Automation">
+  <meta property="og:description" content="Robotics, embedded systems and automation: safe RL on a UR5e arm, STM32/ESP32 firmware, and hands-on prototypes. KUET Mechatronics graduate.">
+  <meta property="og:image" content="https://abdurrabbi23.github.io/assets/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Md Abdur Rabbi, Mechatronics Engineer, Robotics and Automation">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Browser-tab icon -->
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <meta name="theme-color" content="#0e7c86">
+
+  <!-- Fonts (IBM Plex) from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Sets light/dark mode before the page draws (prevents a white flash). -->
+  <script>
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) {}
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.dataset.theme = saved || (prefersDark ? 'dark' : 'light');
+    })();
+  </script>
+
+  <!-- Structured data: helps Google understand who this page is about -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Md Abdur Rabbi",
+    "jobTitle": "Mechatronics Engineer",
+    "url": "https://abdurrabbi23.github.io/",
+    "email": "mailto:abrabbi9999@gmail.com",
+    "address": { "@type": "PostalAddress", "addressLocality": "Khulna", "addressCountry": "BD" },
+    "alumniOf": "Khulna University of Engineering & Technology (KUET)",
+    "sameAs": ["https://www.linkedin.com/in/abdurrabbi", "https://github.com/abdurRabbi23"]
+  }
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ===== HEADER & NAVIGATION ===== -->
+  <header class="site-header">
+    <nav class="container nav" aria-label="Main">
+      <a class="logo" href="#top">Md Abdur Rabbi</a>
+      <div class="nav-right">
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#thesis">Thesis</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch theme">
+          <!-- moon icon (shown in light mode) -->
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          <!-- sun icon (shown in dark mode) -->
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+        <button class="icon-btn menu-btn" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ===== HERO (first screen) ===== -->
+    <section class="hero" id="top">
+      <div class="container hero-inner">
+        <div>
+          <h1>Md Abdur Rabbi</h1>
+          <p class="headline">Mechatronics Engineer | Robotics &amp; Automation</p>
+          <p class="intro">I build machines that sense, decide and move, from STM32 and ESP32 firmware to reinforcement-learning policies for a UR5e robot arm. KUET Mechatronics graduate, based in Khulna, Bangladesh.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="assets/cv/Md_Abdur_Rabbi_CV.pdf" download>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+              Download CV
+            </a>
+            <a class="btn btn-ghost" href="#contact">Contact me</a>
+          </div>
+          <p class="availability">Open to full-time roles in robotics, automation and embedded systems.</p>
+        </div>
+        <!-- PROFILE PHOTO: to use a real photo, replace the <div ...>AR</div> line below with:
+             <img class="avatar" src="assets/img/profile.jpg" alt="Photo of Md Abdur Rabbi" width="240" height="240"> -->
+        <div class="avatar avatar-placeholder" aria-hidden="true">AR</div>
+      </div>
+    </section>
+
+
+    <!-- ===== ABOUT ===== -->
+    <section class="section" id="about">
+      <div class="container">
+        <p class="section-label">01 / About</p>
+        <h2>About me</h2>
+        <div class="about-grid">
+          <div>
+            <p>I'm a Mechatronics Engineering graduate of Khulna University of Engineering &amp; Technology (KUET, CGPA 3.57/4.00). My work sits where hardware meets software: microcontroller firmware and sensors, mechanisms designed in SolidWorks, computer vision in Python, and, for my thesis, deep reinforcement learning for a robot arm in NVIDIA Isaac Sim.</p>
+            <p>Outside the lab I've spent more than two years on KUET's Formula Student team (Kilo Flight), led the hardware section of a new aircraft design team (KAVEN), and helped run a national robotics festival for 1,200+ participants. I like hands-on engineering with a clear structure, leading small technical teams, and building prototypes that actually work.</p>
+            <p><strong>What I'm looking for:</strong> full-time roles in robotics, automation, R&amp;D or embedded systems in Bangladesh (Khulna or Dhaka). I'm also open to part-time work.</p>
+          </div>
+          <ul class="facts">
+            <li><span>Location</span><span>Khulna, Bangladesh</span></li>
+            <li><span>Degree</span><span>B.Sc. Mechatronics, KUET</span></li>
+            <li><span>CGPA</span><span>3.57 / 4.00</span></li>
+            <li><span>Graduated</span><span>August 2026</span></li>
+            <li><span>Languages</span><span>Bangla, English</span></li>
+            <li><span>Open to</span><span>Full-time, Khulna / Dhaka</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== FEATURED: THESIS ===== -->
+    <section class="section" id="thesis">
+      <div class="container">
+        <p class="section-label">02 / Featured project</p>
+        <div class="thesis-top">
+          <figure>
+            <img src="assets/img/thesis-isaac-sim.jpg" width="1400" height="933"
+                 alt="UR5e robot arm with a two-finger gripper above a cube in NVIDIA Isaac Sim">
+            <figcaption>The UR5e pick-and-lift task in NVIDIA Isaac Sim.</figcaption>
+          </figure>
+          <div>
+            <h2>Safe robotic grasping with constrained deep reinforcement learning</h2>
+            <p class="thesis-meta">B.Sc. thesis · KUET · 2025–2026</p>
+            <p>Comparative evaluation of constrained vs. unconstrained deep RL for safe robotic grasping on a UR5e manipulator in simulation.</p>
+            <ul class="tags" aria-label="Technologies">
+              <li>Reinforcement learning</li><li>PPO / PPO-Lagrangian</li><li>NVIDIA Isaac Sim</li><li>Isaac Lab</li><li>Python</li><li>Linux</li>
+            </ul>
+            <div class="stats">
+              <div class="stat"><b>&gt;80%</b><span>lower average safety cost</span></div>
+              <div class="stat"><b>~99.9%</b><span>lift success, same as the baseline</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-study">
+          <div class="case-block">
+            <h3>// Problem</h3>
+            <p>A robot arm trained with reinforcement learning can learn to grasp well and still behave unsafely along the way, for example by moving through near-singular poses where it loses dexterity. Adding a penalty to the reward is the usual fix, but it gives no guarantee. Can stating safety as an explicit <em>constraint</em> make a learned grasping policy safer without making it worse at the task?</p>
+          </div>
+          <div class="case-block">
+            <h3>// Approach</h3>
+            <ul>
+              <li>Built a UR5e pick-and-lift task with a ROBOTIS RH-P12-RN gripper in NVIDIA Isaac Lab.</li>
+              <li>Defined a safety cost that penalizes approaching kinematic singularities (the main constraint), joint limits, and the table.</li>
+              <li>Compared standard PPO against constrained PPO (PPO-Lagrangian) at two safety budgets, plus a control arm to isolate the effect of the constraint itself.</li>
+              <li>Trained every method on 5 independent random seeds and evaluated the frozen policies on 15,000 episodes each.</li>
+            </ul>
+          </div>
+          <div class="case-block">
+            <h3>// Results</h3>
+            <ul>
+              <li>The constrained agent <strong>cut the average safety cost by more than 80%</strong> while keeping the <strong>same ~99.9% lift success</strong> as the unconstrained baseline.</li>
+              <li>Its biggest effect was on <em>consistency</em>: the unconstrained agent's safety varied wildly from one training run to the next, while the constrained agent's stayed in a tight, predictable band.</li>
+            </ul>
+          </div>
+          <div class="case-block">
+            <h3>// What I learned</h3>
+            <ul>
+              <li>Unconstrained RL doesn't have one safety level. It has a spread, and which one a training run lands on is close to luck, so multi-seed evaluation is essential.</li>
+              <li>Isolating one variable with a control arm is what makes a comparison trustworthy.</li>
+              <li>Practical Isaac Sim/Isaac Lab work on Linux: environment design, reward and cost shaping, and validating simulated geometry against manufacturer specs.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== PROJECTS =====
+         Each project is one <article class="card"> ... </article> block.
+         To add a project: copy a whole block, paste it, and change the text.
+         (See MAINTAINING.md for a ready-to-paste template.) -->
+    <section class="section" id="projects">
+      <div class="container">
+        <p class="section-label">03 / Projects</p>
+        <h2>Projects</h2>
+        <p class="section-intro">Hardware and software I've designed and built, from mechanisms and firmware to computer vision.</p>
+
+        <div class="projects-grid">
+
+          <!-- ----- Project: Automated Paper Grading and Dispensing System ----- -->
+          <article class="card">
+            <img class="card-img" src="assets/img/paper-grader-prototype.jpg" width="506" height="537" loading="lazy"
+                 alt="Prototype of the automated paper grading and dispensing machine with rollers, lead screws and control boards">
+            <div class="card-body">
+              <h3>Automated Paper Grading and Dispensing System</h3>
+              <p class="card-meta">2025 · 5-member team · MTE 4108</p>
+              <p class="card-summary">A Raspberry Pi machine that grades exam sheets with OCR and feeds them out one sheet at a time.</p>
+              <ul class="tags" aria-label="Technologies">
+                <li>Raspberry Pi</li><li>NEMA17 stepper</li><li>Lead screw</li><li>SolidWorks</li><li>Google Cloud Vision</li>
+              </ul>
+              <details>
+                <summary>Read more</summary>
+                <ul>
+                  <li><strong>Problem:</strong> Grading paper exams by hand is slow, repetitive and error-prone.</li>
+                  <li><strong>The system:</strong> A camera captures each answer sheet. OCR (Google Cloud Vision) reads the answers and checks them against a stored key, and the score is shown on a laptop. A roller mechanism then dispenses the graded sheet and feeds the next one.</li>
+                  <li><strong>My role:</strong> I designed the NEMA17 lead-screw paper-feed mechanism, which lowers the roller carriage by 0.12 mm per sheet (the thickness of 100 GSM paper), and integrated the Raspberry Pi control for the OCR grading pipeline.</li>
+                  <li><strong>Result:</strong> Built and demonstrated as a working prototype (MTE 4108 Design of Mechatronic Systems sessional).</li>
+                </ul>
+                <figure>
+                  <img src="assets/img/paper-grader-cad.jpg" width="768" height="392" loading="lazy"
+                       alt="SolidWorks CAD views of the paper feed frame with rollers and lead screws">
+                  <figcaption>SolidWorks model of the feed mechanism.</figcaption>
+                </figure>
+              </details>
+            </div>
+          </article>
+
+          <!-- ----- Project: Gesture-Controlled Car ----- -->
+          <article class="card">
+            <img class="card-img" src="assets/img/gesture-car.jpg" width="1000" height="1333" loading="lazy"
+                 alt="Four-wheel robot car with an ESP32 board, motor driver and three 18650 batteries on an acrylic chassis">
+            <div class="card-body">
+              <h3>Gesture-Controlled Car</h3>
+              <p class="card-meta">Solo project</p>
+              <p class="card-summary">A four-wheel car driven entirely by hand gestures seen through a webcam. No remote, no joystick.</p>
+              <ul class="tags" aria-label="Technologies">
+                <li>Python</li><li>OpenCV</li><li>MediaPipe (cvzone)</li><li>ESP32</li><li>Wi-Fi (UDP)</li><li>L298N</li>
+              </ul>
+              <details>
+                <summary>Read more</summary>
+                <ul>
+                  <li><strong>Problem:</strong> Control a vehicle naturally, without any handheld controller.</li>
+                  <li><strong>How it works:</strong> A Python program uses OpenCV and MediaPipe hand tracking (cvzone) to count the raised fingers on the webcam feed. Each count maps to a drive command, which is sent over Wi-Fi (UDP) to an ESP32 on the car. The ESP32 drives four gear motors through an L298N motor driver, powered by three 18650 Li-ion cells.</li>
+                  <li><strong>Result:</strong> Drove the real car in real time using finger-count gestures.</li>
+                  <li><strong>My role:</strong> Solo. I built the vision software, the ESP32 firmware and the car.</li>
+                </ul>
+              </details>
+              <div class="card-links">
+                <a href="https://github.com/abdurRabbi23/hand-gesture-controlled-car" target="_blank" rel="noopener">Code on GitHub ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- ----- Project: STM32 Environmental Monitoring Station ----- -->
+          <article class="card">
+            <img class="card-img" src="assets/img/stm32-station.jpg" width="1000" height="1333" loading="lazy"
+                 alt="STM32 Nucleo board wired to a BMP280 sensor and a 20x4 LCD showing temperature and pressure readings">
+            <div class="card-body">
+              <h3>STM32 Environmental Monitoring Station</h3>
+              <p class="card-meta">Team project · led the build</p>
+              <p class="card-summary">STM32 firmware that reads a pressure sensor, logs temperature and pressure to a PC and plots it live.</p>
+              <ul class="tags" aria-label="Technologies">
+                <li>STM32 Nucleo-F446RE</li><li>STM32CubeIDE / HAL</li><li>C</li><li>I2C</li><li>UART</li><li>Python</li>
+              </ul>
+              <details>
+                <summary>Read more</summary>
+                <ul>
+                  <li>Reads a BMP280 sensor over I2C every 2 seconds and shows the values on a 20×4 I2C LCD.</li>
+                  <li>Streams CSV data over UART to a PC, where a Python script (pyserial + Matplotlib) plots it live.</li>
+                  <li>Modular firmware with separate sensor, LCD and application drivers.</li>
+                  <li><strong>My role:</strong> I led the build: firmware, wiring and the Python live plot.</li>
+                </ul>
+              </details>
+              <div class="card-links">
+                <a href="https://github.com/abdurRabbi23/stm32-environmental-monitoring-station" target="_blank" rel="noopener">Code on GitHub ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- ----- Project: IoT Real-Time Weather Station (no photo yet) ----- -->
+          <article class="card">
+            <div class="card-body">
+              <h3>IoT Real-Time Weather Station (3 platforms)</h3>
+              <p class="card-meta">Solo project</p>
+              <p class="card-summary">The same weather station built three times, on Arduino Uno, ESP32 and STM32, with a Wi-Fi dashboard.</p>
+              <ul class="tags" aria-label="Technologies">
+                <li>Arduino Uno</li><li>ESP32</li><li>STM32</li><li>DHT11</li><li>BMP180</li><li>IoT dashboard</li>
+              </ul>
+              <details>
+                <summary>Read more</summary>
+                <ul>
+                  <li>Measures temperature, humidity, pressure, rainfall and light (DHT11, BMP180, rain sensor, LDR).</li>
+                  <li>Implemented separately on three microcontroller platforms, each with a local LCD, plus a Wi-Fi IoT web dashboard.</li>
+                  <li>A hands-on comparison of three embedded toolchains.</li>
+                </ul>
+              </details>
+            </div>
+          </article>
+
+          <!-- ----- Project: Automated Washing Plant ----- -->
+          <article class="card">
+            <img class="card-img" src="assets/img/washing-plant.jpg" width="1400" height="788" loading="lazy"
+                 alt="Conveyor-belt washing plant prototype with water flowing onto the belt">
+            <div class="card-body">
+              <h3>Automated Washing Plant</h3>
+              <p class="card-meta">2023 · Team project · course project</p>
+              <p class="card-summary">A conveyor-belt system that automatically washes and dries parts, triggered by IR sensors.</p>
+              <ul class="tags" aria-label="Technologies">
+                <li>Arduino Uno</li><li>Embedded C</li><li>IR sensors</li><li>Conveyor mechanism</li>
+              </ul>
+              <details>
+                <summary>Read more</summary>
+                <ul>
+                  <li>A conveyor carries each part through wash and dry stations. IR sensors detect the part and trigger each stage in sequence.</li>
+                  <li><strong>My role:</strong> Mechanical build of the conveyor system and the Embedded C control logic on Arduino Uno.</li>
+                  <li>Sensor &amp; Instrumentation course project.</li>
+                </ul>
+              </details>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== EXPERIENCE & LEADERSHIP ===== -->
+    <section class="section" id="experience">
+      <div class="container">
+        <p class="section-label">04 / Experience</p>
+        <h2>Experience &amp; leadership</h2>
+        <ol class="timeline">
+
+          <li>
+            <h3>Core Organizer &amp; Sector Lead</h3>
+            <p class="org">CALIBRATION 2.0, National Robotics Festival (KUET)</p>
+            <p class="date">2026</p>
+            <ul>
+              <li>Led the Logistics &amp; Kit Management segment for 1,200+ participants, and the RC Speed Battle segment.</li>
+              <li>Contributed to event planning and budgeting; directed teams of junior volunteers.</li>
+            </ul>
+          </li>
+
+          <li>
+            <h3>Senior Executive, Drivetrain</h3>
+            <p class="org">Team Kilo Flight, Formula Student (KUET)</p>
+            <p class="date">Jun 2023 – Sep 2025</p>
+            <ul>
+              <li>Progressed from Trainee to Executive Assistant (Jun 2023 – Jun 2024) to Senior Executive, Drivetrain (Jun 2024 – Sep 2025).</li>
+              <li>Worked on drivetrain design and the electrical powertrain for one of Bangladesh's leading Formula Student teams.</li>
+            </ul>
+          </li>
+
+          <li>
+            <h3>Hardware Section Lead</h3>
+            <p class="org">KAVEN, KUET Aerial Vehicles Engineering Network</p>
+            <p class="date">Nov 2024 – Feb 2025</p>
+            <ul>
+              <li>Pioneer member of KUET's newly founded aircraft/drone design club; led the hardware section for aircraft builds targeting international design competitions.</li>
+            </ul>
+          </li>
+
+          <li>
+            <h3>Member, Sports Committee</h3>
+            <p class="org">Residential Hall Committee, KUET</p>
+            <p class="date">2024 – 2025</p>
+            <ul>
+              <li>Organized 5 tournaments for ~700 hall residents, maintained sporting facilities, and served three terms as Hall Dining Manager.</li>
+              <li>Champion, Inter-Batch Badminton (Men's Singles), Dept. of Mechatronics Engineering (2026). Key player (badminton), team coach (football) and participant (cricket) at the 2026 Inter-Department Tournaments.</li>
+            </ul>
+          </li>
+
+          <li>
+            <h3>Class Representative</h3>
+            <p class="org">Dept. of Mechatronics Engineering, KUET</p>
+            <p class="date">Sep 2022 – Jan 2023</p>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ===== SKILLS ===== -->
+    <section class="section" id="skills">
+      <div class="container">
+        <p class="section-label">05 / Skills</p>
+        <h2>Skills</h2>
+        <div class="skills-grid">
+          <div class="skill-group">
+            <h3>Robotics &amp; simulation</h3>
+            <ul class="tags"><li>NVIDIA Isaac Sim</li><li>Isaac Lab</li><li>Reinforcement learning (PPO, PPO-Lagrangian)</li><li>Computer vision (OpenCV)</li></ul>
+          </div>
+          <div class="skill-group">
+            <h3>Embedded &amp; IoT</h3>
+            <ul class="tags"><li>STM32 Nucleo</li><li>ESP32</li><li>Arduino</li><li>Raspberry Pi</li><li>I2C / SPI / UART</li><li>Sensors &amp; actuators</li><li>Motor drivers</li><li>IoT dashboards</li></ul>
+          </div>
+          <div class="skill-group">
+            <h3>Programming</h3>
+            <ul class="tags"><li>Python (NumPy, Matplotlib, OpenCV)</li><li>Embedded C</li><li>Linux (basics)</li><li>Git / GitHub</li></ul>
+          </div>
+          <div class="skill-group">
+            <h3>CAD &amp; control</h3>
+            <ul class="tags"><li>SolidWorks</li><li>MATLAB</li><li>Simulink</li><li>Proteus</li><li>Control systems</li><li>PLC (lab training)</li></ul>
+          </div>
+          <div class="skill-group">
+            <h3>Languages</h3>
+            <ul class="tags"><li>Bangla (native)</li><li>English (fluent)</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== EDUCATION ===== -->
+    <section class="section" id="education">
+      <div class="container">
+        <p class="section-label">06 / Education</p>
+        <h2>Education</h2>
+        <ul class="edu-list">
+          <li>
+            <h3>B.Sc. in Mechatronics Engineering</h3>
+            <p>Khulna University of Engineering &amp; Technology (KUET) · <span class="date">Mar 2022 – Aug 2026</span></p>
+            <p>CGPA 3.57 / 4.00 · Thesis: constrained vs. unconstrained deep RL for safe robotic grasping (UR5e, Isaac Sim/Isaac Lab)</p>
+          </li>
+          <li>
+            <h3>HSC (Science)</h3>
+            <p>Alamdanga Govt. College, Chuadanga · <span class="date">2020</span> · GPA 5.00 / 5.00</p>
+          </li>
+          <li>
+            <h3>SSC (Science)</h3>
+            <p>Alamdanga Academy, Chuadanga · <span class="date">2018</span> · GPA 5.00 / 5.00 · Govt. General Scholarship</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ===== CONTACT ===== -->
+    <section class="section" id="contact">
+      <div class="container">
+        <p class="section-label">07 / Contact</p>
+        <div class="contact-box">
+          <div>
+            <h2>Let's talk</h2>
+            <p>I'm open to full-time roles in robotics, automation and embedded systems. The fastest way to reach me is email.</p>
+            <a class="btn btn-primary" href="mailto:abrabbi9999@gmail.com">Email me</a>
+          </div>
+          <ul class="contact-list">
+            <li><span>Email</span><a href="mailto:abrabbi9999@gmail.com">abrabbi9999@gmail.com</a></li>
+            <li><span>Phone</span><a href="tel:+8801772847930">+880 1772-847930</a></li>
+            <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/abdurrabbi" target="_blank" rel="noopener">linkedin.com/in/abdurrabbi</a></li>
+            <li><span>GitHub</span><a href="https://github.com/abdurRabbi23" target="_blank" rel="noopener">github.com/abdurRabbi23</a></li>
+            <li><span>Location</span>Khulna, Bangladesh</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year">2026</span> Md Abdur Rabbi</p>
+      <p>Built with plain HTML &amp; CSS · Hosted on GitHub Pages</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

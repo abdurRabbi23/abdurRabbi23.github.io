@@ -1,0 +1,15 @@
+# ------------------------------------------------------------------
+# Files git should NEVER upload to GitHub (this repo is PUBLIC).
+# ------------------------------------------------------------------
+
+# Private working notes: interview answers, drafts, research, progress log.
+_notes/
+PROGRESS.md
+
+# Original, uncompressed photos/videos (only the compressed copies in assets/ get published).
+_originals/
+
+# Windows / editor clutter
+Thumbs.db
+desktop.ini
+.vscode/

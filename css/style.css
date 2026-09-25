@@ -1,0 +1,299 @@
+/* =====================================================================
+   style.css — all the looks of the site (design "Blueprint")
+   ---------------------------------------------------------------------
+   HOW TO CHANGE COLORS: edit the variables in section 1 below.
+   - The first block is LIGHT mode, the next two blocks are DARK mode
+     (one for "follow the device setting", one for "user pressed the
+     toggle"). Keep the two dark blocks identical.
+   HOW TO CHANGE FONTS: edit --font-sans / --font-mono, and the Google
+   Fonts <link> in the <head> of index.html and 404.html.
+   ===================================================================== */
+
+
+/* ---------- 1. Colors & fonts (design tokens) ---------- */
+:root {
+  --bg:          #f7f9fb;   /* page background */
+  --surface:     #ffffff;   /* cards */
+  --text:        #0f1b2d;   /* main text */
+  --muted:       #4a5a70;   /* secondary text */
+  --line:        #dde3ea;   /* thin borders, grid lines */
+  --line-strong: #b9c3cf;   /* button outlines */
+  --accent:      #0e7c86;   /* teal: links, main button */
+  --on-accent:   #ffffff;   /* text on top of the teal button */
+  --tag-bg:      #e3f1f2;   /* skill/tech tag background */
+  --tag-text:    #0a5a61;   /* skill/tech tag text */
+
+  --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  --radius: 6px;
+  --max-width: 1080px;      /* width of the content column */
+  color-scheme: light;
+}
+
+/* Dark mode, when the visitor's device is set to dark (and they haven't chosen light) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1520; --surface: #131e2c; --text: #e6edf5; --muted: #9fb0c3;
+    --line: #223044; --line-strong: #34465e; --accent: #3cc4cf; --on-accent: #062a2e;
+    --tag-bg: #12323a; --tag-text: #8fe3ea;
+    color-scheme: dark;
+  }
+}
+/* Dark mode, when the visitor pressed the theme toggle */
+:root[data-theme="dark"] {
+  --bg: #0d1520; --surface: #131e2c; --text: #e6edf5; --muted: #9fb0c3;
+  --line: #223044; --line-strong: #34465e; --accent: #3cc4cf; --on-accent: #062a2e;
+  --tag-bg: #12323a; --tag-text: #8fe3ea;
+  color-scheme: dark;
+}
+
+
+/* ---------- 2. Basics ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; /* room for the sticky header */ }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;          /* 17px */
+  line-height: 1.65;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+h1, h2, h3 { line-height: 1.2; margin: 0 0 .5em; }
+h2 { font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem); font-weight: 600; }
+h3 { font-size: 1.15rem; font-weight: 600; }
+p { margin: 0 0 1em; }
+ul { margin: 0 0 1em; padding-left: 1.2em; }
+li { margin-bottom: .35em; }
+
+/* Keyboard focus outline (only shows when using Tab, not mouse clicks) */
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+/* Content column */
+.container { width: 100%; max-width: var(--max-width); margin: 0 auto; padding: 0 16px; }
+@media (min-width: 720px) { .container { padding: 0 24px; } }
+
+/* "Skip to content" link for keyboard/screen-reader users (hidden until focused) */
+.skip-link { position: absolute; left: -9999px; top: 8px; background: var(--accent); color: var(--on-accent); padding: 8px 12px; border-radius: var(--radius); z-index: 100; }
+.skip-link:focus { left: 8px; }
+
+/* Small monospace "label" style used for section numbers, dates, tags */
+.mono { font-family: var(--font-mono); }
+
+
+/* ---------- 3. Header & navigation ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 60px; }
+.logo { font-family: var(--font-mono); font-weight: 500; color: var(--text); text-decoration: none; letter-spacing: .02em; }
+.nav-right { display: flex; align-items: center; gap: 4px; }
+
+.nav-links { list-style: none; margin: 0; padding: 0; display: flex; gap: 4px; }
+.nav-links a { display: block; padding: 8px 10px; color: var(--muted); text-decoration: none; font-size: .95rem; border-radius: var(--radius); }
+.nav-links a:hover { color: var(--text); background: var(--tag-bg); }
+
+.icon-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; padding: 0;
+  background: transparent; color: var(--text);
+  border: 1px solid var(--line); border-radius: var(--radius); cursor: pointer;
+}
+.icon-btn:hover { border-color: var(--line-strong); }
+.icon-btn svg { width: 20px; height: 20px; }
+/* The theme button shows a moon in light mode and a sun in dark mode */
+.icon-sun { display: none; }
+:root[data-theme="dark"] .icon-sun { display: block; }
+:root[data-theme="dark"] .icon-moon { display: none; }
+
+/* Mobile: links hide behind the menu button */
+.menu-btn { display: none; }
+@media (max-width: 859px) {
+  .menu-btn { display: inline-flex; }
+  .nav-links {
+    display: none;
+    position: absolute; left: 0; right: 0; top: 100%;
+    flex-direction: column; gap: 0;
+    background: var(--bg); border-bottom: 1px solid var(--line);
+    padding: 8px 16px 16px;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a { padding: 12px 8px; font-size: 1rem; }
+}
+
+
+/* ---------- 4. Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 18px; border-radius: var(--radius);
+  font-weight: 500; font-size: 1rem; text-decoration: none;
+  border: 1px solid transparent;
+}
+.btn svg { width: 18px; height: 18px; }
+.btn-primary { background: var(--accent); color: var(--on-accent); }
+.btn-primary:hover { filter: brightness(1.08); text-decoration: none; }
+.btn-ghost { border-color: var(--line-strong); color: var(--text); background: var(--surface); }
+.btn-ghost:hover { border-color: var(--accent); text-decoration: none; }
+
+
+/* ---------- 5. Hero (first screen) ---------- */
+.hero {
+  padding: 56px 0 48px;
+  border-bottom: 1px solid var(--line);
+  /* the faint "engineering paper" grid */
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 28px 28px;
+  background-position: -1px -1px;
+}
+.hero-inner { display: grid; gap: 28px; align-items: center; }
+@media (min-width: 860px) {
+  .hero { padding: 88px 0 80px; }
+  .hero-inner { grid-template-columns: 1fr auto; gap: 48px; }
+}
+.hero h1 { font-size: clamp(2.2rem, 1.6rem + 3vw, 3.4rem); font-weight: 600; margin-bottom: .2em; letter-spacing: -.01em; }
+.hero .headline { font-size: clamp(1.1rem, 1rem + .6vw, 1.35rem); color: var(--muted); margin-bottom: 1em; }
+.hero .intro { max-width: 58ch; font-size: 1.1rem; background: var(--bg); /* keeps text readable over the grid */ }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 24px 0 16px; }
+.hero .availability { font-size: .95rem; color: var(--muted); margin: 0; }
+.hero .availability::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #22a06b; margin-right: 8px; vertical-align: 1px; }
+
+/* Profile photo (or the "AR" placeholder circle) */
+.avatar {
+  width: 180px; height: 180px; border-radius: 50%;
+  border: 1px solid var(--line-strong); background: var(--surface);
+  object-fit: cover;
+}
+@media (min-width: 860px) { .avatar { width: 240px; height: 240px; } }
+.avatar-placeholder {
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 3.5rem; font-weight: 500; color: var(--accent);
+}
+
+
+/* ---------- 6. Sections (shared) ---------- */
+.section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+@media (min-width: 860px) { .section { padding: 88px 0; } }
+.section-label { font-family: var(--font-mono); font-size: .85rem; color: var(--accent); margin: 0 0 8px; }
+.section-intro { color: var(--muted); max-width: 62ch; margin-bottom: 32px; }
+
+/* About */
+.about-grid { display: grid; gap: 24px; }
+@media (min-width: 860px) { .about-grid { grid-template-columns: 2fr 1fr; gap: 48px; } }
+.about-grid p { max-width: 65ch; }
+.facts { list-style: none; padding: 20px; margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); font-size: .95rem; }
+.facts li { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--line); margin: 0; }
+.facts li:last-child { border-bottom: 0; }
+.facts span:first-child { color: var(--muted); }
+.facts span:last-child { text-align: right; font-weight: 500; }
+
+
+/* ---------- 7. Tags (little tech labels) ---------- */
+.tags { list-style: none; padding: 0; margin: 0 0 16px; display: flex; flex-wrap: wrap; gap: 6px; }
+.tags li { margin: 0; font-family: var(--font-mono); font-size: .78rem; padding: 3px 9px; border-radius: 999px; background: var(--tag-bg); color: var(--tag-text); }
+
+
+/* ---------- 8. Featured thesis ---------- */
+.thesis-top { display: grid; gap: 28px; margin-bottom: 36px; }
+@media (min-width: 860px) { .thesis-top { grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center; } }
+.thesis-top figure { margin: 0; }
+.thesis-top img { border-radius: var(--radius); border: 1px solid var(--line); }
+.thesis-top figcaption { font-size: .85rem; color: var(--muted); margin-top: 8px; }
+.thesis-meta { font-family: var(--font-mono); font-size: .85rem; color: var(--muted); margin-bottom: 12px; }
+
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 20px 0 0; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; }
+.stat b { display: block; font-size: 1.8rem; line-height: 1.1; color: var(--accent); font-weight: 600; }
+.stat span { font-size: .9rem; color: var(--muted); }
+
+.case-study { display: grid; gap: 16px; }
+@media (min-width: 720px) { .case-study { grid-template-columns: 1fr 1fr; } }
+.case-block { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; }
+.case-block h3 { font-family: var(--font-mono); font-size: .9rem; font-weight: 500; color: var(--accent); margin-bottom: 10px; }
+.case-block p, .case-block ul { font-size: 1rem; }
+.case-block > :last-child { margin-bottom: 0; }
+
+
+/* ---------- 9. Project cards ---------- */
+.projects-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); }
+.card {
+  display: flex; flex-direction: column;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  overflow: hidden;
+}
+.card-img { aspect-ratio: 4 / 3; width: 100%; object-fit: cover; border-bottom: 1px solid var(--line); background: var(--tag-bg); }
+.card-body { padding: 18px 20px 20px; display: flex; flex-direction: column; flex: 1; }
+.card-body h3 { margin-bottom: 6px; }
+.card-meta { font-family: var(--font-mono); font-size: .8rem; color: var(--muted); margin-bottom: 10px; }
+.card-summary { color: var(--muted); font-size: 1rem; }
+.card-links { margin-top: auto; padding-top: 8px; display: flex; gap: 16px; font-size: .95rem; }
+
+/* "Read more" expanders (built-in HTML <details>, no JavaScript needed) */
+details { border-top: 1px solid var(--line); padding-top: 10px; margin-bottom: 8px; }
+summary { cursor: pointer; font-weight: 500; color: var(--accent); list-style-position: inside; }
+summary:hover { text-decoration: underline; }
+details[open] summary { margin-bottom: 10px; }
+details ul { font-size: .97rem; }
+details figure { margin: 12px 0 0; }
+details figcaption { font-size: .85rem; color: var(--muted); margin-top: 6px; }
+details img { border: 1px solid var(--line); border-radius: var(--radius); }
+
+
+/* ---------- 10. Experience timeline ---------- */
+.timeline { list-style: none; padding: 0; margin: 0; border-left: 2px solid var(--line); }
+.timeline > li { position: relative; padding: 0 0 32px 24px; margin: 0; }
+.timeline > li:last-child { padding-bottom: 0; }
+.timeline > li::before {
+  content: ""; position: absolute; left: -7px; top: 8px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--bg); border: 2px solid var(--accent);
+}
+.timeline h3 { margin-bottom: 2px; }
+.timeline .org { color: var(--text); margin-bottom: 2px; }
+.timeline .date { font-family: var(--font-mono); font-size: .85rem; color: var(--muted); margin-bottom: 8px; }
+.timeline ul { margin-bottom: 0; }
+
+
+/* ---------- 11. Skills ---------- */
+.skills-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); }
+.skill-group { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+.skill-group h3 { font-size: 1rem; margin-bottom: 12px; }
+.skill-group .tags { margin: 0; }
+
+
+/* ---------- 12. Education ---------- */
+.edu-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; }
+.edu-list li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; margin: 0; }
+.edu-list h3 { margin-bottom: 4px; }
+.edu-list p { margin: 0; color: var(--muted); }
+.edu-list .date { font-family: var(--font-mono); font-size: .85rem; }
+
+
+/* ---------- 13. Contact ---------- */
+.contact-box { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; display: grid; gap: 24px; }
+@media (min-width: 860px) { .contact-box { grid-template-columns: 1fr 1fr; align-items: center; padding: 40px; } }
+.contact-list { list-style: none; padding: 0; margin: 0; }
+.contact-list li { display: flex; gap: 12px; align-items: baseline; padding: 10px 0; border-bottom: 1px solid var(--line); margin: 0; flex-wrap: wrap; }
+.contact-list li:last-child { border-bottom: 0; }
+.contact-list span { font-family: var(--font-mono); font-size: .8rem; color: var(--muted); width: 80px; flex-shrink: 0; }
+.contact-list a { word-break: break-word; }
+
+
+/* ---------- 14. Footer ---------- */
+.site-footer { padding: 32px 0 40px; font-size: .9rem; color: var(--muted); }
+.site-footer .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+.site-footer a { color: var(--muted); }
+
+
+/* ---------- 15. 404 page ---------- */
+.not-found { min-height: 70vh; display: flex; align-items: center; }
+.not-found .code { font-family: var(--font-mono); font-size: 4rem; color: var(--accent); margin: 0; line-height: 1; }
